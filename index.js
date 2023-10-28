@@ -31,7 +31,7 @@ const server = http.createServer((req, res) => {
     }
 
     // Forward the request to the target port
-    proxy.web(req, res, { target: `http://localhost:${targetPort}` });
+    proxy.web(req, res, { target: `localhost:${targetPort}` });
 });
 
 server.listen(19132);
