@@ -33,7 +33,7 @@ const server = http.createServer((req, res) => {
     proxy.web(req, res, { target: `http://localhost:${targetPort}` });
 });
 
-server.listen(80);
+server.listen(19132);
 console.log("Reverse Proxy Server Started")
 
 
