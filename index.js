@@ -20,6 +20,7 @@ let hostList = [{
 
 const server = http.createServer((req, res) => {
     const hostname = req.headers.host;
+    console.log(hostname)
 
     // Define the target ports for different domains
     let targetPort = 0;
