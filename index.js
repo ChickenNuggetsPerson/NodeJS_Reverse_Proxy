@@ -8,6 +8,9 @@ const server = http.createServer((req, res) => {
 
     // Define the target ports for different domains
     let targetPort;
+
+    console.log(host)
+
     if (host === 'steelefolio.com') {
         targetPort = 19133;
     } else if (host === 'ducks.steelefolio.com') {
