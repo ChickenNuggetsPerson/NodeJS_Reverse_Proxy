@@ -33,7 +33,7 @@ const server = http.createServer((req, res) => {
 
 });
 
-server.listen(19132);
+server.listen(80);
 console.log("Reverse Proxy Server Started")
 
 
