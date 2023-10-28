@@ -3,20 +3,28 @@ const httpProxy = require('http-proxy');
 
 const proxy = httpProxy.createProxyServer({});
 
+
+let hostList = [{
+    domain: "steelefolio.com",
+    port: 19133
+},{
+    domain: "ducks.steelefolio.com",
+    port: 19134
+}]
+
 const server = http.createServer((req, res) => {
-    const host = req.headers.host;
+    const hostname = req.headers.host;
 
     // Define the target ports for different domains
-    let targetPort;
+    let targetPort = 0;
 
-    console.log(host)
+    hostList.forEach(host => {
+        if (hostname.startsWith(host.domain)) {
+            targetPort = host.port
+        }
+    })
 
-    if (host.startsWith('steelefolio.com')) {
-        targetPort = 19133;
-    } else if (host.startsWith('ducks.steelefolio.com')) {
-        targetPort = 19134;
-    } else {
-
+    if (targetPort == 0) {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Domain not configured');
         return;
