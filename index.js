@@ -11,9 +11,9 @@ const server = http.createServer((req, res) => {
 
     console.log(host)
 
-    if (host === 'steelefolio.com') {
+    if (host.startsWith('steelefolio.com')) {
         targetPort = 19133;
-    } else if (host === 'ducks.steelefolio.com') {
+    } else if (host.startsWith('ducks.steelefolio.com')) {
         targetPort = 19134;
     } else {
 
