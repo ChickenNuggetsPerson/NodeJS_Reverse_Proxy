@@ -15,7 +15,8 @@ let hostList = [{
 const server = http.createServer((req, res) => {
     const hostname = req.headers.host;
 
-    // Define the target ports for different domains
+    console.log(new Date().getMilliseconds(), " ", hostname)
+
     let targetPort = 0;
     hostList.forEach(host => {
         if (hostname.startsWith(host.domain)) {
@@ -30,7 +31,6 @@ const server = http.createServer((req, res) => {
     }
 
     proxy.web(req, res, { target: `http://localhost:${targetPort}` });
-
 });
 
 server.listen(80);
@@ -38,5 +38,5 @@ console.log("Reverse Proxy Server Started")
 
 
 process.on('uncaughtException', (error) => {
-    console.error('Uncaught Exception:', error);
+    console.log('Uncaught Exception:', error);
 });
