@@ -15,7 +15,7 @@ let hostList = [{
 const server = http.createServer((req, res) => {
     const hostname = req.headers.host;
 
-    console.log(new Date().getMilliseconds(), " ", hostname)
+    //console.log(new Date().getMilliseconds(), " ", hostname)
 
     let targetPort = 0;
     hostList.forEach(host => {
