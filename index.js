@@ -6,10 +6,16 @@ const proxy = httpProxy.createProxyServer({});
 
 let hostList = [{
     domain: "steelefolio.com",
-    port: 19133
+    port: 19133,
+    isHttps: false
 },{
     domain: "ducks.steelefolio.com",
-    port: 19134
+    port: 19134,
+    isHttps: false
+},{
+    domain: "library.steeleinnovations.com",
+    port: 19135,
+    isHttps: true
 }]
 
 const server = http.createServer((req, res) => {
@@ -17,10 +23,12 @@ const server = http.createServer((req, res) => {
 
     // Define the target ports for different domains
     let targetPort = 0;
+    let isHttps = false;
 
     hostList.forEach(host => {
         if (hostname.startsWith(host.domain)) {
             targetPort = host.port
+            isHttps = host.isHttps
         }
     })
 
@@ -30,8 +38,11 @@ const server = http.createServer((req, res) => {
         return;
     }
 
-    // Forward the request to the target port
-    proxy.web(req, res, { target: `localhost:${targetPort}` });
+    if (isHttps) {
+        proxy.web(req, res, { target: `https://localhost:${targetPort}` });
+    } else {
+        proxy.web(req, res, { target: `http://localhost:${targetPort}` });
+    }
 });
 
 server.listen(19132);
